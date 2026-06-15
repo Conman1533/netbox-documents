@@ -22,7 +22,7 @@ The pip package is `netbox-documents-4.6-fork`, but the NetBox plugin module rem
 
 | NetBox Version | netbox-docker | Package |
 |----------------|---------------|---------|
-| **4.6.x** | **5.0.x** | **netbox-documents-4.6-fork 0.0.1** |
+| **4.6.x** | **5.0.x** | **netbox-documents-4.6-fork 0.0.2** |
 | 4.3–4.5 | 3.x–4.x | netbox-documents 0.8.2 (upstream) |
 
 For upstream netbox-documents compatibility history, see [CHANGELOG.md](CHANGELOG.md).
@@ -58,7 +58,7 @@ The plugin previously used 8 separate database models (SiteDocument, DeviceDocum
 
 ## Installation
 
-NetBox 4.6.x is recommended. NetBox 4.3+ may work but is not the primary target for netbox-documents-4.6-fork 0.0.1.
+NetBox 4.6.x is recommended. NetBox 4.3+ may work but is not the primary target for netbox-documents-4.6-fork 0.0.2.
 
 #### Package Installation from PyPI
 
@@ -72,7 +72,7 @@ $ source /opt/netbox/venv/bin/activate
 To ensure the plugin is automatically re-installed during future upgrades, add the package to your `local_requirements.txt` or `plugin_requirements.txt`:
 
 ```
-netbox-documents-4.6-fork==0.0.1
+netbox-documents-4.6-fork==0.0.2
 ```
 
 #### Docker (netbox-docker 5.0.x)

@@ -1,5 +1,9 @@
 # Changelog
 
+## netbox-documents-4.6-fork 0.0.2 (2026-06-15)
+
+* Bump version to 0.0.2 to fix PyPI release overwrite error
+
 ## netbox-documents-4.6-fork 0.0.1 (2026-06-15)
 
 Fork of netbox-documents with NetBox 4.6 / netbox-docker 5.0.x compatibility.

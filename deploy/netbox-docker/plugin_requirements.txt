@@ -1,1 +1,1 @@
-netbox-documents-4.6-fork==0.0.1
+netbox-documents-4.6-fork==0.0.2
