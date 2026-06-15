@@ -1,0 +1,58 @@
+{% load helpers %}
+
+<div class="card">
+<h5 class="card-header">
+    Documents
+</h5>
+<div class="card-body">
+{% if documents %}
+    <table class="table table-hover">
+        <tr>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Type</th>
+            <th></th>
+        </tr>
+        {% for document in documents %}
+        <tr>
+            <td>
+                <a href="{% firstof document.external_url document.document.url %}" target="_blank">{% firstof document.name document.filename document.external_url %}</a>
+            </td>
+            <td>{% if document.size %}{{ document.size|filesizeformat }}{% else %}<span class="text-muted">&mdash;</span>{% endif %}</td>
+            <td>{% badge document.get_document_type_display bg_color=document.get_document_type_color %}</td>
+            <td class="text-end noprint">
+                {% if perms.netbox_documents.view_document %}
+                <a href="{% url 'plugins:netbox_documents:document' pk=document.pk %}" class="btn btn-primary btn-sm lh-1" title="View Document">
+                    <i class="mdi mdi-book" aria-hidden="true"></i>
+                  </a>
+                {% endif %}
+                {% if perms.netbox_documents.change_document %}
+                  <a href="{% url 'plugins:netbox_documents:document_edit' pk=document.pk %}?return_url={{ return_url }}" class="btn btn-warning btn-sm lh-1" title="Edit Document">
+                    <i class="mdi mdi-pencil" aria-hidden="true"></i>
+                  </a>
+                {% endif %}
+                {% if perms.netbox_documents.delete_document %}
+                  <a href="{% url 'plugins:netbox_documents:document_delete' pk=document.pk %}?return_url={{ return_url }}" class="btn btn-danger btn-sm lh-1" title="Delete Document">
+                    <i class="mdi mdi-trash-can-outline" aria-hidden="true"></i>
+                  </a>
+                {% endif %}
+              </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <div class="text-muted">
+            None
+        </div>
+    {% endif %}
+    </div>
+    {% if perms.netbox_documents.add_document %}
+        <div class="card-footer text-end noprint">
+            <a href="{% url 'plugins:netbox_documents:document_add' %}?content_type={{ content_type_id }}&object_id={{ object.pk }}&return_url={{ return_url }}" class="btn btn-primary btn-sm">
+                <i class="mdi mdi-plus-thick" aria-hidden="true"></i>
+                Add Document
+            </a>
+        </div>
+    {% endif %}
+
+</div>

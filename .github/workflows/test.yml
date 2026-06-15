@@ -1,0 +1,92 @@
+name: Test against NetBox 4.6
+
+on:
+  push:
+    branches:
+      - main
+      - newdoc
+  pull_request:
+    branches:
+      - main
+      - newdoc
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout plugin
+        uses: actions/checkout@v4
+
+      - name: Checkout netbox-docker
+        uses: actions/checkout@v4
+        with:
+          repository: netbox-community/netbox-docker
+          ref: release
+          path: netbox-docker
+
+      - name: Prepare plugin build context
+        run: |
+          mkdir -p netbox-docker/newdoc-src
+          rsync -a --exclude netbox-docker ./ netbox-docker/newdoc-src/
+
+      - name: Write Dockerfile-Plugins
+        run: |
+          cat > netbox-docker/Dockerfile-Plugins << 'EOF'
+          FROM netboxcommunity/netbox:v4.6.2-5.0.1
+          COPY ./newdoc-src /opt/netbox/newdoc-src
+          RUN /usr/local/bin/uv pip install /opt/netbox/newdoc-src
+          EOF
+
+      - name: Write plugins config
+        run: |
+          cat > netbox-docker/configuration/plugins.py << 'EOF'
+          PLUGINS = ['netbox_documents']
+          EOF
+
+      - name: Write compose override
+        run: |
+          cat > netbox-docker/docker-compose.override.yml << 'EOF'
+          services:
+            netbox:
+              build:
+                context: .
+                dockerfile: Dockerfile-Plugins
+              image: netbox:newdoc-test
+              pull_policy: never
+            netbox-worker:
+              image: netbox:newdoc-test
+              pull_policy: never
+          EOF
+
+      - name: Ensure CI secrets
+        run: |
+          if ! grep -q '^SECRET_KEY=' netbox-docker/env/netbox.env; then
+            echo "SECRET_KEY=ci-dummy-secret-key-not-for-production-use-only" >> netbox-docker/env/netbox.env
+          fi
+
+      - name: Build images
+        working-directory: netbox-docker
+        run: docker compose build netbox netbox-worker
+
+      - name: Start dependencies
+        working-directory: netbox-docker
+        run: docker compose up -d postgres redis redis-cache
+
+      - name: Wait for postgres
+        working-directory: netbox-docker
+        run: |
+          for i in $(seq 1 30); do
+            docker compose exec -T postgres pg_isready -U netbox && exit 0
+            sleep 2
+          done
+          exit 1
+
+      - name: Run migrations
+        working-directory: netbox-docker
+        run: docker compose run --rm --no-TTY netbox python /opt/netbox/netbox/manage.py migrate --no-input
+
+      - name: Run plugin tests
+        working-directory: netbox-docker
+        run: docker compose run --rm --no-TTY netbox python /opt/netbox/netbox/manage.py test netbox_documents
