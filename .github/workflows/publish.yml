@@ -24,6 +24,9 @@ jobs:
       - name: Install build tools
         run: pip install build
 
+      - name: Clean old build artifacts
+        run: rm -rf dist build *.egg-info
+
       - name: Extract version
         id: version
         run: echo "version=$(sed -n "s/^    version = '\(.*\)'/\1/p" netbox_documents/__init__.py | head -1)" >> $GITHUB_OUTPUT
@@ -31,7 +34,7 @@ jobs:
       - name: Build package
         run: python -m build
 
-      - name: Publish to PyPI
+      - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
 
       - name: Create GitHub Release
