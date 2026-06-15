@@ -1,6 +1,6 @@
 services:
   netbox:
-    image: netbox:newdoc-plugins
+    image: netbox:documents-4-6-fork-plugins
     pull_policy: never
     ports:
       - 8000:8080
@@ -8,5 +8,5 @@ services:
       context: .
       dockerfile: Dockerfile-Plugins
   netbox-worker:
-    image: netbox:newdoc-plugins
+    image: netbox:documents-4-6-fork-plugins
     pull_policy: never

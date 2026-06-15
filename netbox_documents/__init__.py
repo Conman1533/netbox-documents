@@ -3,7 +3,7 @@ from netbox.plugins import PluginConfig
 
 class NetboxDocuments(PluginConfig):
     name = 'netbox_documents'
-    verbose_name = 'NewDoc'
+    verbose_name = 'NetBox Documents (4.6 fork)'
     description = 'Attach documents and external URLs to any NetBox object'
     version = '0.0.1'
     author = 'Jason Yates'

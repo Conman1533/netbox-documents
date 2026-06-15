@@ -1,8 +1,8 @@
-# NewDoc
+# NetBox Documents (4.6 fork)
 
-A [NetBox](https://github.com/netbox-community/netbox) plugin for attaching documents and external URLs to any object. **newdoc** is a fork of [netbox-documents](https://github.com/jasonyates/netbox-documents) with verified support for NetBox 4.6.x and [netbox-docker](https://github.com/netbox-community/netbox-docker) 5.0.x.
+A [NetBox](https://github.com/netbox-community/netbox) plugin for attaching documents and external URLs to any object. This is a fork of [netbox-documents](https://github.com/jasonyates/netbox-documents) with verified support for NetBox 4.6.x and [netbox-docker](https://github.com/netbox-community/netbox-docker) 5.0.x.
 
-The pip package is `newdoc`, but the NetBox plugin module remains `netbox_documents` for compatibility with existing databases and configurations.
+The pip package is `netbox-documents-4.6-fork`, but the NetBox plugin module remains `netbox_documents` for compatibility with existing databases and configurations.
 
 ## Features
 
@@ -22,7 +22,7 @@ The pip package is `newdoc`, but the NetBox plugin module remains `netbox_docume
 
 | NetBox Version | netbox-docker | Package |
 |----------------|---------------|---------|
-| **4.6.x** | **5.0.x** | **newdoc 0.0.1** |
+| **4.6.x** | **5.0.x** | **netbox-documents-4.6-fork 0.0.1** |
 | 4.3–4.5 | 3.x–4.x | netbox-documents 0.8.2 (upstream) |
 
 For upstream netbox-documents compatibility history, see [CHANGELOG.md](CHANGELOG.md).
@@ -58,7 +58,7 @@ The plugin previously used 8 separate database models (SiteDocument, DeviceDocum
 
 ## Installation
 
-NetBox 4.6.x is recommended. NetBox 4.3+ may work but is not the primary target for newdoc 0.0.1.
+NetBox 4.6.x is recommended. NetBox 4.3+ may work but is not the primary target for netbox-documents-4.6-fork 0.0.1.
 
 #### Package Installation from PyPI
 
@@ -66,13 +66,13 @@ Activate your virtual env and install via pip:
 
 ```
 $ source /opt/netbox/venv/bin/activate
-(venv) $ pip install newdoc
+(venv) $ pip install netbox-documents-4.6-fork
 ```
 
 To ensure the plugin is automatically re-installed during future upgrades, add the package to your `local_requirements.txt` or `plugin_requirements.txt`:
 
 ```
-newdoc==0.0.1
+netbox-documents-4.6-fork==0.0.1
 ```
 
 #### Docker (netbox-docker 5.0.x)

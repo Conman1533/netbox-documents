@@ -1,6 +1,6 @@
 # NewDoc on netbox-docker 5.0.x
 
-Install **newdoc** (NetBox 4.6.x / netbox-docker 5.0.x) using the official [netbox-docker plugin workflow](https://github.com/netbox-community/netbox-docker/wiki/Using-Netbox-Plugins).
+Install **netbox-documents-4.6-fork** (NetBox 4.6.x / netbox-docker 5.0.x) using the official [netbox-docker plugin workflow](https://github.com/netbox-community/netbox-docker/wiki/Using-Netbox-Plugins).
 
 ## Prerequisites
 
@@ -20,10 +20,10 @@ cd netbox-docker
 2. Copy these files into the netbox-docker root:
 
 ```bash
-cp /path/to/newdoc/deploy/netbox-docker/plugin_requirements.txt .
-cp /path/to/newdoc/deploy/netbox-docker/Dockerfile-Plugins .
-cp /path/to/newdoc/deploy/netbox-docker/docker-compose.override.yml .
-cp /path/to/newdoc/deploy/netbox-docker/configuration/plugins.py configuration/plugins.py
+cp /path/to/netbox-documents-4.6-fork/deploy/netbox-docker/plugin_requirements.txt .
+cp /path/to/netbox-documents-4.6-fork/deploy/netbox-docker/Dockerfile-Plugins .
+cp /path/to/netbox-documents-4.6-fork/deploy/netbox-docker/docker-compose.override.yml .
+cp /path/to/netbox-documents-4.6-fork/deploy/netbox-docker/configuration/plugins.py configuration/plugins.py
 ```
 
 3. Configure secrets in `env/netbox.env` (see `docker-compose.override.yml.example` in netbox-docker).
@@ -47,14 +47,14 @@ To test unreleased changes, replace `plugin_requirements.txt` with a path instal
 
 ```dockerfile
 FROM netboxcommunity/netbox:v4.6.2-5.0.1
-COPY ./newdoc /opt/netbox/newdoc
-RUN /usr/local/bin/uv pip install /opt/netbox/newdoc
+COPY ./plugin-src /opt/netbox/plugin-src
+RUN /usr/local/bin/uv pip install /opt/netbox/plugin-src
 ```
 
-Copy your plugin source into `netbox-docker/newdoc/` before building.
+Copy your plugin source into `netbox-docker/plugin-src/` before building.
 
 ## Notes
 
-- The pip package is `newdoc`, but NetBox still loads `netbox_documents` in `PLUGINS`.
+- The pip package is `netbox-documents-4.6-fork`, but NetBox still loads `netbox_documents` in `PLUGINS`.
 - API endpoint: `/api/plugins/netbox-documents/documents/`
 - UI paths: `/plugins/documents/documents/`

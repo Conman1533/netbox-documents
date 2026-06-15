@@ -12,14 +12,14 @@ with open(path.join(top_level_directory, 'requirements.txt')) as file:
     ]
 
 setup(
-    name='newdoc',
+    name='netbox-documents-4.6-fork',
     version='0.0.1',
     description='Attach documents and external URLs to any NetBox object',
     long_description=long_description,
     long_description_content_type='text/markdown',
     author='Jason Yates',
     author_email='me@jasonyates.co.uk',
-    url='https://github.com/jasonyates/netbox-documents',
+    url='https://github.com/Conman1533/netbox-documents',
     install_requires=required,
     packages=find_packages(),
     include_package_data=True,

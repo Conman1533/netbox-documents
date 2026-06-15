@@ -1,5 +1,11 @@
 # Changelog
 
+## netbox-documents-4.6-fork 0.0.1 (2026-06-15)
+
+Fork of netbox-documents with NetBox 4.6 / netbox-docker 5.0.x compatibility.
+
+* Rename PyPI package from `newdoc` to `netbox-documents-4.6-fork`
+
 ## newdoc 0.0.1 (2026-06-12)
 
 Fork of netbox-documents with NetBox 4.6 / netbox-docker 5.0.x compatibility.

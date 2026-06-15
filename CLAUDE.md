@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-**newdoc** — a NetBox plugin (module `netbox_documents`) that attaches documents and external URLs to any NetBox object. Fork of netbox-documents with verified NetBox 4.6 / netbox-docker 5.0.x support. Uses a single `Document` model with Django's ContentType framework (GenericForeignKey).
+**netbox-documents-4.6-fork** — a NetBox plugin (module `netbox_documents`) that attaches documents and external URLs to any NetBox object. Fork of netbox-documents with verified NetBox 4.6 / netbox-docker 5.0.x support. Uses a single `Document` model with Django's ContentType framework (GenericForeignKey).
 
 ## Development Environment
 
@@ -12,7 +12,7 @@ This plugin runs inside a NetBox installation. You need a working NetBox dev env
 
 ```bash
 source /opt/netbox/venv/bin/activate
-pip install -e /path/to/newdoc
+pip install -e /path/to/netbox-documents-4.6-fork
 python manage.py migrate netbox_documents
 python manage.py runserver
 ```
